@@ -24,7 +24,7 @@ const user = {
 };
 const navigation = [
     { name: 'Contacts', href: route('dashboard'), current: true },
-    { name: 'Events', href: '#', current: false },
+    { name: 'Events', href: route('events'), current: false },
 ];
 const userNavigation = [
     { name: 'Your Profile', href: route('user-password.edit') },

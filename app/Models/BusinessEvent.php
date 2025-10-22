@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Database\Factories\BusinessEventFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @property CarbonImmutable $started_at
+ * @property CarbonImmutable $ended_at
+ */
 class BusinessEvent extends Model
 {
     /** @use HasFactory<BusinessEventFactory> */
