@@ -6,6 +6,7 @@ use Database\Factories\BusinessEventFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class BusinessEvent extends Model
 {
@@ -26,6 +27,14 @@ class BusinessEvent extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return BelongsToMany<Contact, $this>
+     */
+    public function contacts(): BelongsToMany
+    {
+        return $this->belongsToMany(Contact::class, 'business_event_contact', 'business_event_id', 'contact_id');
     }
 
     protected function casts(): array

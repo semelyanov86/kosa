@@ -6,6 +6,7 @@ use App\Filament\Resources\BusinessEvents\Pages\CreateBusinessEvent;
 use App\Filament\Resources\BusinessEvents\Pages\EditBusinessEvent;
 use App\Filament\Resources\BusinessEvents\Pages\ListBusinessEvents;
 use App\Filament\Resources\BusinessEvents\Pages\ViewBusinessEvent;
+use App\Filament\Resources\BusinessEvents\RelationManagers\ContactsRelationManager;
 use App\Filament\Resources\BusinessEvents\Schemas\BusinessEventForm;
 use App\Filament\Resources\BusinessEvents\Schemas\BusinessEventInfolist;
 use App\Filament\Resources\BusinessEvents\Tables\BusinessEventsTable;
@@ -46,7 +47,7 @@ final class BusinessEventResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ContactsRelationManager::class,
         ];
     }
 
