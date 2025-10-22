@@ -197,6 +197,10 @@ tasks:
       - "php artisan migrate:fresh --seed"
       - "php artisan db:seed"
 
+  dev:
+    desc: "Run in development mode"
+    cmd: "npm run dev"
+
   deploy:
     desc: "Run deployment process"
     cmds:

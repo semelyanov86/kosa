@@ -18,9 +18,13 @@ class DatabaseSeeder extends Seeder
         if (! User::where('email', 'admin@kosatech.com')->exists()) {
             User::factory()->create([
                 'name' => 'Admin',
-                'email' => 'admin@kosatech.com',
+                'email' => 'admin@kosatec.com',
                 'password' => 'password',
                 'is_admin' => true,
+                'is_manager' => true,
+                'two_factor_secret' => null,
+                'two_factor_confirmed_at' => null,
+                'two_factor_recovery_codes' => null,
             ]);
         }
     }
