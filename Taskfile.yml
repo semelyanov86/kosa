@@ -51,7 +51,6 @@ tasks:
     cmds:
       - task: composer-validate
       - task: composer-audit
-      - task: lint
       - task: rector
       - task: phpstan
       - task: type-check

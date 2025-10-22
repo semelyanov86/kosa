@@ -43,18 +43,6 @@ parameters:
 			path: app/Http/Controllers/Settings/TwoFactorAuthenticationController.php
 
 		-
-			message: '#^Parameter \#1 \$string of function str expects string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Http/Middleware/HandleInertiaRequests.php
-
-		-
-			message: '#^Parameter \#1 \$string of function trim expects string, string\|null given\.$#'
-			identifier: argument.type
-			count: 2
-			path: app/Http/Middleware/HandleInertiaRequests.php
-
-		-
 			message: '#^Cannot access property \$id on App\\Models\\User\|null\.$#'
 			identifier: property.nonObject
 			count: 1

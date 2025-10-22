@@ -38,6 +38,7 @@ class HandleInertiaRequests extends Middleware
     #[\Override]
     public function share(Request $request): array
     {
+        // @phpstan-ignore-next-line
         [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
 
         return [
