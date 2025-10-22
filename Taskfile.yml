@@ -201,6 +201,10 @@ tasks:
     desc: "Run in development mode"
     cmd: "npm run dev"
 
+  build:
+    desc: "Run in production mode"
+    cmd: "npm run build"
+
   deploy:
     desc: "Run deployment process"
     cmds:
