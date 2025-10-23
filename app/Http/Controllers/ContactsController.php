@@ -8,8 +8,10 @@ use App\Actions\GetContactList;
 use App\Actions\UpdateContact;
 use App\Data\ContactData;
 use App\Data\PaginationFilterData;
+use App\Http\Requests\BusinessCardRequest;
 use App\Http\Requests\ContactEditRequest;
 use App\Models\Contact;
+use App\Services\MindeeBusinessCardService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -61,5 +63,62 @@ final class ContactsController extends Controller
         $contact->delete();
 
         return to_route('dashboard')->with('message', 'Contact deleted and can not be restored');
+    }
+
+    public function parseBusinessCard(
+        BusinessCardRequest $request,
+        MindeeBusinessCardService $mindeeService,
+        CreateContact $createAction
+    ): RedirectResponse {
+        $tempFilePath = null;
+
+        try {
+            /** @var \Illuminate\Http\UploadedFile|null $file */
+            $file = $request->file('business_card');
+
+            if (! $file) {
+                throw new \Exception('No file uploaded');
+            }
+
+            if (! $file->isValid()) {
+                throw new \Exception('Uploaded file is not valid: '.$file->getErrorMessage());
+            }
+
+            $tempDir = storage_path('app/temp');
+            if (! is_dir($tempDir) && ! mkdir($tempDir, 0755, true) && ! is_dir($tempDir)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $tempDir));
+            }
+
+            $fileName = uniqid('', true).'_'.time().'.'.$file->getClientOriginalExtension();
+
+            $tempFilePath = $tempDir.'/'.$fileName;
+            $file->move($tempDir, $fileName);
+
+            if (! file_exists($tempFilePath)) {
+                throw new \Exception("Failed to save file to: {$tempFilePath}");
+            }
+
+            \Log::info('Business card file saved', [
+                'path' => $tempFilePath,
+                'size' => filesize($tempFilePath),
+            ]);
+
+            $contactData = $mindeeService->parseBusinessCard($tempFilePath);
+
+            $createdContact = $createAction->handle($contactData);
+
+            return to_route('contacts.edit', ['id' => $createdContact->id])->with('message', 'Contact successfully updated with id '.$createdContact->id);
+
+        } catch (\Exception $e) {
+            \Log::error('Business card parsing failed', [
+                'message' => $e->getMessage(),
+                'file' => $request->file('business_card')?->getClientOriginalName(),
+                'temp_path' => $tempFilePath,
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            return back()->withErrors($e->getMessage())->with('message', $e->getMessage());
+
+        }
     }
 }

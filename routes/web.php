@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -12,6 +13,8 @@ Route::get('/', function () {
 
 Route::get('dashboard', [\App\Http\Controllers\ContactsController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware(['auth', 'verified'])->name('contacts.')->group(function () {
+    Route::post('contacts/parse-business-card', [ContactsController::class, 'parseBusinessCard'])
+        ->name('parseBusinessCard');
     Route::get('contacts/create', [\App\Http\Controllers\ContactsController::class, 'create'])->name('create');
     Route::get('contacts/{id}', [\App\Http\Controllers\ContactsController::class, 'edit'])->name('edit');
     Route::post('contacts', [\App\Http\Controllers\ContactsController::class, 'store'])->name('store');
