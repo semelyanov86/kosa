@@ -2,6 +2,7 @@
 
 namespace App\Data;
 
+use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelData\Data;
 
 final class ContactData extends Data
@@ -19,13 +20,14 @@ final class ContactData extends Data
     ) {}
 
     /**
-     * @return array<string, scalar>
+     * @return array<string, scalar|null>
      */
     public function toEntityArray(): array
     {
         /** @var array<string, scalar> $data */
         $data = $this->toArray();
         unset($data['id']);
+        $data['user_id'] = Auth::id();
 
         return $data;
     }

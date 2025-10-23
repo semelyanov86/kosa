@@ -3,6 +3,8 @@ import PaginationList from '@/components/PaginationList.vue';
 import { ContactModel } from '@/types/ContactModel';
 import { PaginationModel } from '@/types/PaginationModel';
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/vue/20/solid';
+import { router } from '@inertiajs/vue3';
+import { route } from 'ziggy-js';
 
 defineProps<{
     contacts: PaginationModel<ContactModel>;
@@ -26,7 +28,14 @@ const defaultImage =
                 <div
                     class="flex w-full items-center justify-between space-x-6 p-6"
                 >
-                    <div class="flex-1 truncate">
+                    <div
+                        class="flex-1 cursor-pointer truncate"
+                        @click="
+                            router.get(
+                                route('contacts.edit', { id: person.id }),
+                            )
+                        "
+                    >
                         <div class="flex items-center space-x-3">
                             <h3
                                 class="truncate text-sm font-medium text-gray-900"

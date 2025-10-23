@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Notification from '@/components/Notification.vue';
 import {
     Disclosure,
     DisclosureButton,
@@ -9,19 +10,16 @@ import {
     MenuItems,
 } from '@headlessui/vue';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
-import { router } from '@inertiajs/vue3';
+import { router, usePage } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 
 interface Props {
     title?: string;
 }
 
-const user = {
-    name: 'Tom Cook',
-    email: 'tom@example.com',
-    imageUrl:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-};
+const userImageUrl =
+    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80';
+const user = usePage().props.auth.user;
 const navigation = [
     { name: 'Contacts', href: route('dashboard'), current: true },
     { name: 'Events', href: route('events'), current: false },
@@ -101,7 +99,7 @@ withDefaults(defineProps<Props>(), {
                                         >
                                         <img
                                             class="size-8 rounded-full"
-                                            :src="user.imageUrl"
+                                            :src="userImageUrl"
                                             alt=""
                                         />
                                     </MenuButton>
@@ -231,5 +229,11 @@ withDefaults(defineProps<Props>(), {
                 <slot></slot>
             </div>
         </main>
+        <Notification
+            v-if="$page.props.flash?.message"
+            :display="true"
+            header="Successfully executed"
+            :description="$page.props.flash.message"
+        ></Notification>
     </div>
 </template>

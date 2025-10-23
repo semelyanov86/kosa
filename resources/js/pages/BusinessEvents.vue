@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import PaginationList from '@/components/PaginationList.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
+import { formatDateTimeFromString } from '@/lib/utils';
 import { BusinessEventModel } from '@/types/BusinessEventModel';
 import { PaginationModel } from '@/types/PaginationModel';
 import { Head } from '@inertiajs/vue3';
@@ -14,6 +15,21 @@ defineProps<{
     <Head title="Events List" />
 
     <AppLayout title="Events List">
+        <div
+            class="border-b border-gray-200 pb-5 sm:flex sm:items-center sm:justify-between"
+        >
+            <h3 class="text-base font-semibold text-gray-900">
+                Business Events list
+            </h3>
+            <div class="mt-3 sm:mt-0 sm:ml-4">
+                <button
+                    type="button"
+                    class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                    Create new event
+                </button>
+            </div>
+        </div>
         <ul role="list" class="divide-y divide-gray-100">
             <li
                 v-for="project in events.data"
@@ -40,14 +56,15 @@ defineProps<{
                         <p class="whitespace-nowrap">
                             Due on
                             <time :datetime="project.ended_at">{{
-                                project.ended_at
+                                formatDateTimeFromString(project.ended_at)
                             }}</time>
                         </p>
                         <svg viewBox="0 0 2 2" class="size-0.5 fill-current">
                             <circle cx="1" cy="1" r="1" />
                         </svg>
                         <p class="truncate">
-                            Launched at {{ project.started_at }}
+                            Launched at
+                            {{ formatDateTimeFromString(project.started_at) }}
                         </p>
                     </div>
                 </div>

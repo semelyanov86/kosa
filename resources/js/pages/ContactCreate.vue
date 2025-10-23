@@ -115,6 +115,32 @@ defineProps<{
                                 </p>
                             </div>
                         </div>
+                        <div
+                            class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6"
+                        >
+                            <label
+                                for="email"
+                                class="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                                >Phone</label
+                            >
+                            <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                <input
+                                    id="phone"
+                                    name="phone"
+                                    type="phone"
+                                    autocomplete="phone"
+                                    :value="contact.phone"
+                                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:max-w-md sm:text-sm/6"
+                                />
+                                <p
+                                    v-if="errors.phone"
+                                    class="mt-2 text-sm text-red-600"
+                                    id="phone-error"
+                                >
+                                    {{ errors.phone }}
+                                </p>
+                            </div>
+                        </div>
 
                         <div
                             class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6"
@@ -229,7 +255,7 @@ defineProps<{
                 <div class="mt-6 flex items-center justify-end gap-x-6">
                     <button
                         type="button"
-                        class="text-sm/6 font-semibold text-gray-900"
+                        class="cursor-pointer text-sm/6 font-semibold text-gray-900"
                         @click="router.get(route('dashboard'))"
                     >
                         Cancel
