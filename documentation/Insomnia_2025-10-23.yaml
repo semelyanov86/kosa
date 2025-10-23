@@ -1,0 +1,191 @@
+type: collection.insomnia.rest/5.0
+name: Kosa
+meta:
+  id: wrk_cec020ca9d98441695da4175b358e0db
+  created: 1761221105457
+  modified: 1761221105457
+  description: ""
+collection:
+  - name: Auth
+    meta:
+      id: fld_f019fe32dc74472599417b978d7b0d44
+      created: 1761221593228
+      modified: 1761221593228
+      sortKey: -1761221593228
+      description: ""
+    children:
+      - url: "{{ _.BASE_URL }}/token"
+        name: Get Token
+        meta:
+          id: req_eeb8755c1bdf4eb1865a379dbe9fb88d
+          created: 1761221597761
+          modified: 1761221706114
+          isPrivate: false
+          description: ""
+          sortKey: -1761221597762
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"email": "admin@kosatec.com",
+            	"password": "password",
+            	"device_name": "insomnia"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_11a1a5ce376043b8a848798e780d154f
+          - name: User-Agent
+            value: insomnia/11.6.2
+            id: pair_c67c48f278154a8dbfed41cd42951f59
+          - id: pair_74d03db357c54e9a8308851a5962e9ea
+            name: Accept
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/user"
+        name: Get User Info
+        meta:
+          id: req_36c5a4f430e747ca8334b28f2a508a8e
+          created: 1761221851737
+          modified: 1761221902870
+          isPrivate: false
+          description: ""
+          sortKey: -1761221851737
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.2
+            id: pair_751ef2570b914aef98c47a148ae8bd13
+          - id: pair_6c4f1c073c224f19a7eb243c4427d998
+            name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+          - id: pair_349d72bb2f3747b28aebe9cedcb27fba
+            name: Accept
+            value: application/json
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{{ _.TOKEN }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Contacts
+    meta:
+      id: fld_65c3ddbf08444bf3875069da71864c7a
+      created: 1761221830336
+      modified: 1761221830336
+      sortKey: -1761221830336
+      description: ""
+    children:
+      - url: "{{ _.BASE_URL }}/contacts"
+        name: Get Contacts All
+        meta:
+          id: req_54870c549e464f7ab222647aa91c1737
+          created: 1761221833867
+          modified: 1761221989163
+          isPrivate: false
+          description: ""
+          sortKey: -1761221833867
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.2
+            id: pair_e0d9c7b7945043a49acab9f316a7dd9f
+          - id: pair_3d275f14625a4681b6020693d88bca88
+            name: Accept
+            value: application/json
+            description: ""
+            disabled: false
+          - id: pair_ee21263fb5634be2b773ff70e4a45707
+            name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{{ _.TOKEN }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Events
+    meta:
+      id: fld_1123983913f242f8b87ccbb6ed28f411
+      created: 1761222147480
+      modified: 1761222147480
+      sortKey: -1761222147480
+      description: ""
+    children:
+      - url: "{{ _.BASE_URL }}/events"
+        name: Get Events
+        meta:
+          id: req_bba80e6528214a5f841686bd5e42d84b
+          created: 1761222151776
+          modified: 1761222194872
+          isPrivate: false
+          description: ""
+          sortKey: -1761222151776
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.2
+            id: pair_d5f64558c04c4bf6be3c01f2f7d926f4
+          - id: pair_31d6f9b30a61498bb75d5401244e152d
+            name: Accept
+            value: application/json
+            description: ""
+            disabled: false
+          - id: pair_5dad3d5e278944d3aba1bc9c649c3ab7
+            name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{{ _.TOKEN }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_ae5e4bd8d959d37cbd8319e7f81a62b80cbea346
+    created: 1761221105460
+    modified: 1761221105460
+environments:
+  name: Base Environment
+  meta:
+    id: env_ae5e4bd8d959d37cbd8319e7f81a62b80cbea346
+    created: 1761221105459
+    modified: 1761221722061
+    isPrivate: false
+  data:
+    BASE_URL: http://kosa.test/api
+    TOKEN: 1|w5GZ5ZDEe9gqCnsxYE8Kgv10fcgFuCtX3WkRjFh19de41472
