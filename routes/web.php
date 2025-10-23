@@ -22,6 +22,8 @@ Route::middleware(['auth', 'verified'])->name('events.')->prefix('events')->grou
     Route::get('/', [\App\Http\Controllers\BusinessEventController::class, 'index'])->name('index');
     Route::get('/create', [\App\Http\Controllers\BusinessEventController::class, 'create'])->name('create');
     Route::get('/{id}', [\App\Http\Controllers\BusinessEventController::class, 'edit'])->name('edit');
+    Route::post('/{event}/contact/{id}', [\App\Http\Controllers\BusinessEventController::class, 'attach'])->name('attach');
+    Route::delete('/{event}/contact/{id}', [\App\Http\Controllers\BusinessEventController::class, 'detach'])->name('detach');
     Route::delete('/{event}', [\App\Http\Controllers\BusinessEventController::class, 'delete'])->name('delete');
     Route::post('/', [\App\Http\Controllers\BusinessEventController::class, 'store'])->name('store');
     Route::post('/{id}', [\App\Http\Controllers\BusinessEventController::class, 'update'])->name('update');

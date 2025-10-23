@@ -2,7 +2,9 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Form, Head, router } from '@inertiajs/vue3';
 
+import RelatedContacts from '@/components/RelatedContacts.vue';
 import { BusinessEventModel } from '@/types/BusinessEventModel';
+import { ContactModel } from '@/types/ContactModel';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { ref } from 'vue';
@@ -11,6 +13,7 @@ import { route } from 'ziggy-js';
 const props = defineProps<{
     id: number;
     event: BusinessEventModel;
+    otherContacts: ContactModel[];
 }>();
 
 const date = ref(props.event.started_at);
@@ -18,8 +21,8 @@ const dateEnded = ref(props.event.ended_at);
 </script>
 
 <template>
-    <Head title="Create Event" />
-    <AppLayout title="Create Event">
+    <Head :title="id ? 'Edit Event' : 'Create Event'" />
+    <AppLayout :title="id ? 'Edit Event' : 'Create Event'">
         <div class="divide-y divide-gray-900/10">
             <div class="grid grid-cols-1 gap-x-8 gap-y-8 py-10 md:grid-cols-3">
                 <div class="px-4 sm:px-0">
@@ -187,6 +190,13 @@ const dateEnded = ref(props.event.ended_at);
                     </div>
                 </Form>
             </div>
+        </div>
+        <div v-if="id">
+            <RelatedContacts
+                :event-id="id"
+                :contacts="event.contacts"
+                :other-contacts="otherContacts"
+            ></RelatedContacts>
         </div>
     </AppLayout>
 </template>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\CreateEvent;
 use App\Actions\GetBusinessEventsList;
+use App\Actions\GetContactsWithoutEvent;
 use App\Actions\GetEventById;
 use App\Actions\UpdateEvent;
 use App\Data\BusinessEventData;
@@ -23,11 +24,12 @@ final class BusinessEventController extends Controller
         ]);
     }
 
-    public function edit(int $id, GetEventById $action): Response
+    public function edit(int $id, GetEventById $action, GetContactsWithoutEvent $contactsAction): Response
     {
         return Inertia::render('CreateEvent', [
             'id' => $id,
             'event' => $action->handle($id),
+            'otherContacts' => $contactsAction->handle($id),
         ]);
     }
 
@@ -36,6 +38,7 @@ final class BusinessEventController extends Controller
         return Inertia::render('CreateEvent', [
             'id' => 0,
             'event' => BusinessEventData::generateNullable(),
+            'otherContacts' => [],
         ]);
     }
 
@@ -59,5 +62,19 @@ final class BusinessEventController extends Controller
         $event->delete();
 
         return to_route('events.index')->with('message', 'Business Event deleted successfully. You can not restore it.');
+    }
+
+    public function attach(BusinessEvent $event, int $contactId): RedirectResponse
+    {
+        $event->contacts()->attach($contactId);
+
+        return back()->with('message', 'Contact attached to Business Event successfully');
+    }
+
+    public function detach(BusinessEvent $event, int $contactId): RedirectResponse
+    {
+        $event->contacts()->detach($contactId);
+
+        return back()->with('message', 'Contact detached from Business Event successfully');
     }
 }
