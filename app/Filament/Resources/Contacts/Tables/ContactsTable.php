@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Contacts\Tables;
 
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -52,6 +53,7 @@ class ContactsTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
+                FilamentExportBulkAction::make('Export')->fileName('contacts')->disablePdf()->csvDelimiter('|'),
             ]);
     }
 }

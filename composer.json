@@ -9,6 +9,7 @@
     ],
     "require": {
         "php": "^8.4",
+        "alperenersoy/filament-export": "^4.0",
         "filament/filament": "^4.0",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/fortify": "^1.30",

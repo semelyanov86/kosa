@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\BusinessEvents\Tables;
 
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -31,6 +32,7 @@ class BusinessEventsTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
+                FilamentExportBulkAction::make('Export')->fileName('events')->disablePdf()->csvDelimiter('|'),
             ]);
     }
 }
