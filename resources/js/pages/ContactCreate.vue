@@ -261,6 +261,16 @@ defineProps<{
                         Cancel
                     </button>
                     <button
+                        v-if="id"
+                        type="button"
+                        @click="
+                            router.delete(route('contacts.delete', { id: id }))
+                        "
+                        class="inline-flex justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                    >
+                        Delete Contact
+                    </button>
+                    <button
                         type="submit"
                         class="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >

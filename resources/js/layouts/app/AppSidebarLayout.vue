@@ -22,7 +22,7 @@ const userImageUrl =
 const user = usePage().props.auth.user;
 const navigation = [
     { name: 'Contacts', href: route('dashboard'), current: true },
-    { name: 'Events', href: route('events'), current: false },
+    { name: 'Events', href: route('events.index'), current: false },
 ];
 const userNavigation = [
     { name: 'Your Profile', href: route('user-password.edit') },

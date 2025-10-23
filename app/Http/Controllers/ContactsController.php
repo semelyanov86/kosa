@@ -9,6 +9,8 @@ use App\Actions\UpdateContact;
 use App\Data\ContactData;
 use App\Data\PaginationFilterData;
 use App\Http\Requests\ContactEditRequest;
+use App\Models\Contact;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -52,5 +54,12 @@ final class ContactsController extends Controller
         $action->handle($dto);
 
         return to_route('dashboard')->with('message', 'Contact successfully updated with id '.$id);
+    }
+
+    public function delete(Contact $contact): RedirectResponse
+    {
+        $contact->delete();
+
+        return to_route('dashboard')->with('message', 'Contact deleted and can not be restored');
     }
 }
